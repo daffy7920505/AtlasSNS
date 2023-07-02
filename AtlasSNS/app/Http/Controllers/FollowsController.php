@@ -92,19 +92,4 @@ class FollowsController extends Controller
             ->delete();
             return back();// リターンでの動きで戻る
     }
-    public function followlist(Request $request)
-    {
-        //ディレクトリ名
-        $dir = 'sample'
-        //アップロードされたファイル名
-        $file_images = $request->file('images')->getClientoriginalName();
-        //取得したファイル名で保存
-        $request->file('image')->storeAs('public/ . $dir, $filename');
-        //ファイル情報をDBに保存
-        $image = new ImageI();
-        $image->name = $images;
-        $image->path = 'storage/' . $dir '/' . $file_images;
-        $image->save();
-        return redirect('/');
-    }
 }

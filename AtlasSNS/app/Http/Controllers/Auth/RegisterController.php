@@ -70,22 +70,28 @@ class RegisterController extends Controller
         ]);
     }
 
-
     // public function registerForm(){
     //     return view("auth.register");
     // }
 
-    public function register(Request $request){
-        if($request->isMethod('post')){
-            $data = $request->input();
+        //ユーザー新規登録処理（ユーザー名の表示）
+    //public function register(Request $request){
 
+    //}
+    public function up()
+    {
+        Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('username');
+
+            $table->string('username');        //こちらです
+            if($request->isMethod('post')){
+        $data = $request->input();
             $this->create($data);
-            return redirect('added');
+            return redirect('/username');
         }
         return view('auth.register');
+        });
     }
 
-    public function added(){
-        return view('auth.added');
-    }
+
 }
