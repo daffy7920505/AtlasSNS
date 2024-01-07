@@ -18,7 +18,7 @@ class PostsController extends Controller
         $post = $request->input('text');
         $userID = Auth::user()->id;
         // 自分の情報を取得するときはAuthを使う
-         \DB::table('posts')->insert([
+        \DB::table('posts')->insert([
             'post' => $post,
             "user_id"=>$userID
         ]);
@@ -51,20 +51,19 @@ class PostsController extends Controller
         return redirect('top');
     }
 
-//アイコンの設置
+    //アイコンの設置
     public function image(Request $request, User $user) {
 
-  // バリデーション省略
-  $originalImg = $request->user_image;
+        // バリデーション省略
+        $originalImg = $request->user_image;
 
-    if($originalImg->isValid()) {
-      $filePath = $originalImg->store('public');
-      $user->image = str_replace('public/', '', $filePath);
-      $user->save();
-      return redirect("/user/{$user->id}")->with('user', $user);
-
-}
-}
+        if($originalImg->isValid()) {
+            $filePath = $originalImg->store('public');
+            $user->image = str_replace('public/', '', $filePath);
+            $user->save();
+            return redirect("/user/{$user->id}")->with('user', $user);
+        }
+    }
     public function show(){
         $posts = Post::get();
         return view('yyy',compact('posts'));

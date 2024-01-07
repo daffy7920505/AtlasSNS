@@ -1,5 +1,11 @@
 @extends('layouts.login')
 
 @section('content')
-<p>フォロワーリスト</p>
+<p>Follower List</p>
+
+@foreach($users as $users)
+  <img src="{{ asset('/storage/'.$users->images) }}">
+
+  @endforeach
+
 @endsection

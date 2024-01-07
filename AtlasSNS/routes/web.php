@@ -22,7 +22,7 @@
 Route::get('/login', 'Auth\LoginController@login');
 Route::post('/login', 'Auth\LoginController@login');
 
-// ...
+// 新規登録時のページ
 // Route::get( '/login', 'Auth\Auth0IndexController@login' )->name( 'login' );
 Route::get( '/logout', 'Auth\LoginController@logout' )->name( 'logout' );
 
@@ -43,9 +43,6 @@ Route::post('/post/update', 'PostsController@updateForm');
 Route::get('/search','UsersController@search');//ユーザー検索への移動
 Route::post('/search','UsersController@search');//ユーザー検索への移動
 // /searchのURLにアクセスがあったらUsersCOntrollerのsearchメソッドを実行
-
-Route::get('/follow-list','PostsController@index');
-Route::get('/follower-list','PostsController@index');
 
 Route::post('/post','PostsController@post');//つぶやき登録 /postとcontrollerを紐づける @~は関数
 // Route::get('/',function(){
@@ -78,19 +75,10 @@ Route::get('follow-delete/{user}', 'FollowsController@unfollow')->name('unfollow
 // Route::resource('users', 'FollowsController', ['only' => ['index', 'show', 'edit', 'update']]);
 
 // フォローリストページの移動
-Route::get('/Follow','FollowsController@followlist');
-
-// フォローリストのユーザーアイコン一覧表示する
-Route::get('/follow','FollwsController@followlist')->name('image');
+Route::get('/Follow','FollowsController@followlist');// /FollwはURLの頭、@followlistはメソッド名（関数）
 
 // フォロワーリストページの移動
 Route::get('/Follower','FollowsController@followerlist');
-
-// フォローボタンの更新
-Route::get('/Following','FollowsController@followlist');
-
-// フォロー解除の更新
-//Route::get('/Follows','FollowsController@followlist');
 
 Route::group(['middleware' => 'auth'], function(){
 
@@ -101,4 +89,3 @@ Route::put('/profile', 'UsersController@profileUpdate')->name('profile_edit');
 //パスワード編集
 Route::put('/password_change', 'UsersController@passwordUpdate')->name('password_edit');
 });
-// Route::post('UserName', 'UsersController@');
